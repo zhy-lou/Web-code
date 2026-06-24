@@ -2,6 +2,8 @@ package com.itheima.springbootwebdemo01.controller;
 
 import cn.hutool.core.io.IoUtil;
 import com.itheima.springbootwebdemo01.pojo.user;
+import com.itheima.springbootwebdemo01.service.UserService;
+import com.itheima.springbootwebdemo01.service.impl.UserServiceImpl;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,26 +20,33 @@ import java.util.stream.Collectors;
 
 @RestController
 public class UserController {
+//    @RequestMapping("/list")
+//         public List<user> list() throws Exception {
+//        //加载读取user.txt文件，获取用户信息
+//        InputStream in = this.getClass().getClassLoader().getResourceAsStream("user.txt");
+//        ArrayList<String> lines = IoUtil.readLines(in, StandardCharsets.UTF_8, new ArrayList<>());
+//
+//        List<user> userList = lines.stream().map(line ->
+//        {
+//            String[] parts = line.split(",");
+//            Integer id = Integer.parseInt(parts[0]);
+//            String username = parts[1];
+//            String password = parts[2];
+//            String name = parts[3];
+//            Integer age = Integer.parseInt(parts[4]);
+//            LocalDateTime updateTime = LocalDateTime.parse(parts[5], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+//            return new user(id, username, password, name, age, updateTime);
+//        }).toList();
+//
+//        return userList;
+//
+
+    private UserService userService = new UserServiceImpl();
+
     @RequestMapping("/list")
-         public List<user> list() throws Exception {
-        //加载读取user.txt文件，获取用户信息
-        InputStream in = this.getClass().getClassLoader().getResourceAsStream("user.txt");
-        ArrayList<String> lines = IoUtil.readLines(in, StandardCharsets.UTF_8, new ArrayList<>());
+    public List<user> list() throws Exception {
 
-        List<user> userList = lines.stream().map(line ->
-        {
-            String[] parts = line.split(",");
-            Integer id = Integer.parseInt(parts[0]);
-            String username = parts[1];
-            String password = parts[2];
-            String name = parts[3];
-            Integer age = Integer.parseInt(parts[4]);
-            LocalDateTime updateTime = LocalDateTime.parse(parts[5], DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
-            return new user(id, username, password, name, age, updateTime);
-        }).toList();
-
+        List<user> userList = userService.findAll();
         return userList;
-
-
     }
 }
