@@ -4,6 +4,7 @@ import cn.hutool.core.io.IoUtil;
 import com.itheima.springbootwebdemo01.pojo.user;
 import com.itheima.springbootwebdemo01.service.UserService;
 import com.itheima.springbootwebdemo01.service.impl.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -41,7 +42,8 @@ public class UserController {
 //        return userList;
 //
 
-    private UserService userService = new UserServiceImpl();
+    @Autowired
+    private UserService userService;
 
     @RequestMapping("/list")
     public List<user> list() throws Exception {
