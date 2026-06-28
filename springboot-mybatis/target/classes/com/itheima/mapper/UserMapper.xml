@@ -7,4 +7,4 @@
     <select id="findAll" resultType="com.itheima.pojo.User">
         select id, username, password, name, age from user
     </select>
-</mapper>
+ </mapper>
